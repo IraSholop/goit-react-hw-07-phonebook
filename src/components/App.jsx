@@ -7,10 +7,12 @@ import { fetchContacts } from 'redux/operations';
 
 export function App() {
   const dispatch = useDispatch();
-  
+  const isLoading = useSelector(load => load.contacts.isLoading);
+  const error = useSelector(e => e.contacts.error);
   useEffect(()=> {
     dispatch(fetchContacts())
   },[dispatch])
+
   const contacts = useSelector(state => state.contacts.array);
   return (
     <div>
@@ -18,6 +20,8 @@ export function App() {
       <ContactForm />
       <h2>Contacts</h2>
       <Filter />
+      {error && <b>{error}</b>}
+      {isLoading && !error && <b>Request in progress...</b>}
       {contacts.length > 0 && <ContactList />}
     </div>
   );
