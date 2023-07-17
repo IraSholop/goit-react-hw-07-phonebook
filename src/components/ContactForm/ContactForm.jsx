@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { add } from 'redux/contacts/slice';
-import { nanoid } from 'nanoid';
+import { addContact } from 'redux/operations';
 
 export function ContactForm() {
   const [name, setName] = useState('');
@@ -26,7 +25,7 @@ export function ContactForm() {
 
   const formSubmitHandler = e => {
     e.preventDefault();
-    const newData = { name, number, id: nanoid() };
+    const newData = { name, number};
     if (contacts.length > 0) {
       const nameFilter = contacts.filter(contact =>
         contact.name.includes(name)
@@ -36,7 +35,7 @@ export function ContactForm() {
         return;
       }
     }
-    dispatch(add(newData));
+    dispatch(addContact(newData));
     reset();
   };
 

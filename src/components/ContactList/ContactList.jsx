@@ -1,6 +1,6 @@
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { remove } from 'redux/contacts/slice';
+import { removeContact } from 'redux/operations';
 
 export function ContactList() {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ export function ContactList() {
   const contacts = useSelector(state => state.contacts.array);
 
   const deleteContact = contactId => {
-    dispatch(remove(contactId));
+    dispatch(removeContact(contactId));
   };
 
   const normalizedFilter = filterValue.toLowerCase();
